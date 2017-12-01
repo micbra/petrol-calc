@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spritkosten</title>
+</head>
+<body>
+    <div class="app">
+        <input type="text" class="input__text js-autocomplete js-form-element">
+        <input type="text" class="input__text js-autocomplete js-form-element">
+        <select class="input__select js-form-element">
+            <option value="diesel">Diesel</option>
+            <option value="e5" selected>Super 95</option>
+            <option value="e10">E10</option>
+        </select>
+        <select class="input__select js-form-element">
+            <option value="5">Niedriger Spritverbrauch (5l/100km)</option>
+            <option value="7" selected>Normaler Spritverbrauch (7l/100km)</option>
+            <option value="10">Hoher Spritverbrauch (10l/100km)</option>
+        </select>
+        <div class="result">
+        </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjeUfNQ-194OyMDUpVH2FQHBPRI-iQQrE&libraries=places"></script>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
