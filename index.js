@@ -38,7 +38,7 @@ const calcAndRenderPrice = (distance, consumption, prices) => {
     renderPrice(price)
 }
 
-const checkForm = () => {
+const checkForm = async () => {
     const values = []
     const formElements = document.querySelectorAll('.js-form-element')
     
@@ -53,14 +53,17 @@ const checkForm = () => {
         const distance = new Distance({from: values[0], to: values[1]})
 
         const destinationCoords = new Geocode(values[1])
-        const aToB = distance.getDistance(1000)
         
-        // get LatLng from b and search there for petrol stations
-        destinationCoords.getCoords()
-            .then(data => findPetrolStations(data, values))
-            .then(getPricesFromPetrolStations)
-            .then(prices => aToB.then(distance => calcAndRenderPrice(distance, values[3], prices)))
-            .catch(err => console.error(err))
+        try {
+            // get LatLng from b and search there for petrol stations
+            const coords = await destinationCoords.getCoords()
+            const stations = await findPetrolStations(coords, values)
+            const prices = await getPricesFromPetrolStations(stations)
+            const distAB = await distance.getDistance(1000)
+            calcAndRenderPrice(distAB, values[3], prices)
+        } catch (err) {
+            console.error(err)
+        }
     }
 }
 
